@@ -16,6 +16,7 @@
       display: flex;
       justify-content: space-between;
       margin: 20px;
+      position: relative;
     }
 
     .event {
@@ -26,6 +27,7 @@
       text-align: center;
       position: relative;
       border-radius: 5px;
+      z-index: 1;
     }
 
     .event::before {
@@ -33,12 +35,11 @@
       position: absolute;
       top: 50%;
       left: 100%;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 8px 0 8px 10px;
-      border-color: transparent transparent transparent #3498db;
+      width: 20px;
+      height: 2px;
+      background-color: #3498db;
       transform: translate(0, -50%);
+      z-index: 0;
     }
   </style>
 </head>
@@ -55,10 +56,6 @@
   <div id="estacas" class="event">Uso de Estacas<br>15/08/2023</div>
   <div id="checagem3" class="event">3º Checagem<br>25/08/2023</div>
 </div>
-
-<script>
-  // Pode adicionar lógica JS aqui se necessário
-</script>
 
 </body>
 </html>
