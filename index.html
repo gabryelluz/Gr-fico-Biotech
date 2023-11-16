@@ -17,7 +17,7 @@
         var atividades = ["Seleção de Sementes", "Secagem de Sementes", "Explante", "Preparação do Ambiente", "Plantio", "1ª Checagem", "2ª Checagem", "Uso de Estacas", "3ª Checagem"];
 
         // Converter as datas para objetos Date
-        datas = datas.map(function(date) {
+        var datasFormatadas = datas.map(function(date) {
             return new Date(date);
         });
 
@@ -28,14 +28,14 @@
         var cronogramaChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: datas,
+                labels: datasFormatadas,
                 datasets: [{
                     label: 'Cronograma de Atividades',
                     borderColor: 'blue',
                     borderWidth: 2,
                     fill: false,
-                    data: atividades.map(function(_, index) {
-                        return { x: datas[index], y: index + 1 };
+                    data: datas.map(function(_, index) {
+                        return { x: datasFormatadas[index], y: index + 1 };
                     })
                 }]
             },
