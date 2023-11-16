@@ -1,73 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cronograma de Atividades</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cronograma de Plantio</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    canvas {
+      max-width: 800px;
+      margin: 20px auto;
+    }
+  </style>
 </head>
 <body>
-    <canvas id="cronogramaChart" width="800" height="400"></canvas>
+  <h2>Cronograma de Plantio</h2>
+  <canvas id="myChart"></canvas>
 
-    <script>
-        // Datas fornecidas
-        var datas = ["01/07/2023", "05/07/2023", "06/07/2023", "06/07/2023", "10/07/2023", "22/07/2023", "03/08/2023", "15/08/2023", "25/08/2023"];
+  <script>
+    // Datas fornecidas
+    const datas = [
+      '01/07/2023', '01/07/2023', '05/07/2023', '06/07/2023', '06/07/2023',
+      '10/07/2023', '22/07/2023', '03/08/2023', '15/08/2023', '25/08/2023'
+    ];
 
-        // Nomes das atividades
-        var atividades = ["Seleção de Sementes", "Secagem de Sementes", "Explante", "Preparação do Ambiente", "Plantio", "1ª Checagem", "2ª Checagem", "Uso de Estacas", "3ª Checagem"];
+    // Converter datas para objetos Date
+    const dateObjects = datas.map(dateString => new Date(dateString));
 
-        // Converter as datas para objetos Date
-        var datasFormatadas = datas.map(function(date) {
-            return new Date(date);
-        });
+    // Criar o contexto do gráfico
+    const ctx = document.getElementById('myChart').getContext('2d');
 
-        // Configurar o contexto do gráfico
-        var ctx = document.getElementById('cronogramaChart').getContext('2d');
-
-        // Criar o gráfico de linha
-        var cronogramaChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: datasFormatadas,
-                datasets: [{
-                    label: 'Cronograma de Atividades',
-                    borderColor: 'blue',
-                    borderWidth: 2,
-                    fill: false,
-                    data: datasFormatadas.map(function(_, index) {
-                        return { x: datasFormatadas[index], y: index + 1 };
-                    })
-                }]
-            },
-            options: {
-                scales: {
-                    x: {
-                        type: 'time',
-                        time: {
-                            unit: 'day',
-                            displayFormats: {
-                                day: 'DD/MM/YYYY'
-                            }
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Atividades'
-                        },
-                        ticks: {
-                            stepSize: 1,
-                            suggestedMax: atividades.length,
-                            beginAtZero: true
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Cronograma de Atividades'
-                }
+    // Configurar o gráfico de linha
+    const myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: datas,
+        datasets: [{
+          label: 'Cronograma de Plantio',
+          borderColor: 'rgb(75, 192, 192)',
+          data: dateObjects,
+          fill: false
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'time',
+            time: {
+              unit: 'day'
             }
-        });
-    </script>
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Datas'
+            }
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
