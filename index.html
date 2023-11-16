@@ -4,65 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cronograma de Plantio</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .timeline {
+      display: flex;
+      justify-content: space-between;
       margin: 20px;
     }
-    canvas {
-      max-width: 800px;
-      margin: 20px auto;
+
+    .event {
+      width: 120px;
+      padding: 10px;
+      background-color: #3498db;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      border-radius: 5px;
+    }
+
+    .event::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px 0 8px 10px;
+      border-color: transparent transparent transparent #3498db;
+      transform: translate(0, -50%);
     }
   </style>
 </head>
 <body>
-  <h2>Cronograma de Plantio</h2>
-  <canvas id="myChart"></canvas>
 
-  <script>
-    // Datas fornecidas
-    const datas = [
-      '01/07/2023', '01/07/2023', '05/07/2023', '06/07/2023', '06/07/2023',
-      '10/07/2023', '22/07/2023', '03/08/2023', '15/08/2023', '25/08/2023'
-    ];
+<div class="timeline">
+  <div id="selecao" class="event">Seleção de Sementes<br>01/07/2023</div>
+  <div id="secagem" class="event">Secagem de Sementes<br>01/07/2023 - 05/07/2023</div>
+  <div id="explante" class="event">Explante<br>06/07/2023</div>
+  <div id="preparacao" class="event">Preparação do Ambiente<br>06/07/2023</div>
+  <div id="plantio" class="event">Plantio<br>10/07/2023</div>
+  <div id="checagem1" class="event">1º Checagem<br>22/07/2023</div>
+  <div id="checagem2" class="event">2º Checagem<br>03/08/2023</div>
+  <div id="estacas" class="event">Uso de Estacas<br>15/08/2023</div>
+  <div id="checagem3" class="event">3º Checagem<br>25/08/2023</div>
+</div>
 
-    // Converter datas para objetos Date
-    const dateObjects = datas.map(dateString => new Date(dateString));
+<script>
+  // Pode adicionar lógica JS aqui se necessário
+</script>
 
-    // Criar o contexto do gráfico
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    // Configurar o gráfico de linha
-    const myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: datas,
-        datasets: [{
-          label: 'Cronograma de Plantio',
-          borderColor: 'rgb(75, 192, 192)',
-          data: dateObjects,
-          fill: false
-        }]
-      },
-      options: {
-        scales: {
-          x: {
-            type: 'time',
-            time: {
-              unit: 'day'
-            }
-          },
-          y: {
-            title: {
-              display: true,
-              text: 'Datas'
-            }
-          }
-        }
-      }
-    });
-  </script>
 </body>
 </html>
